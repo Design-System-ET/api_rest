@@ -88,14 +88,23 @@ public class UsuarioController implements Resources{
     
     //eliminar un usuario por id #ejemplo 6
     @DeleteMapping(DELETE)
-    public ResponseEntity<Map<String, String>> borrarUsuario(@RequestParam("id") Long id){
-        
-        //Elimino un usuario
-        userDAO.deleteById(id);
-        
-        //devulvo la respuesta en json
+    public ResponseEntity<Map<String, String>> borrarUsuario(@RequestParam("id") Long id) {
+	// Devuelvo la respuesta en formato JSON
         Map<String, String> response = new HashMap<>();
+
+        // Validar si el usuario existe
+        if (!userDAO.existsById(id)) {
+            response.put("message", "El usuario no existe");
+
+            // Devolver estado 404 NOT_FOUND
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        }
+
+        // Eliminar usuario
+        userDAO.deleteById(id);
         response.put("message", "Se eliminó correctamente el Usuario");
+
+        // Devolver estado 200 OK
         return ResponseEntity.ok(response);
     }
     
