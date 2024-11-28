@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba PathVariable</title>
+</head>
+<body>
+    <h1>Consulta con PathVariable</h1>
+    <form id="pathVariableForm" action="#" onsubmit="handleSubmit(event)">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required>
+        <br><br>
+        <label for="apellido">Apellido:</label>
+        <input type="text" id="apellido" name="apellido" required>
+        <br><br>
+        <button type="submit">Enviar</button>
+    </form>
+
+
+    
+
+    <script>
+        function handleSubmit(event) {
+            event.preventDefault();
+            const nombre = document.getElementById("nombre").value;
+            const apellido = document.getElementById("apellido").value;
+            const url = `http://localhost:8080/servicios/inicio/nombre/${nombre}/${apellido}`; // Ajusta esta ruta según tu servidor
+            window.location.href = url; // Redirige al endpoint
+        }
+    </script>
+
+
+
+
+</body>
+</html>
+
+
+            

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba RequestBody</title>
+</head>
+<body>
+    <h1>Crear Usuario con RequestBody</h1>
+    <form id="requestBodyForm" onsubmit="enviarUsuario(event)">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required>
+        <br><br>
+        <label for="apellido">Apellido:</label>
+        <input type="text" id="apellido" name="apellido" required>
+        <br><br>
+        <button type="submit">Enviar</button>
+    </form>
+
+    <script>
+        async function enviarUsuario(event) {
+            event.preventDefault();
+            const nombre = document.getElementById("nombre").value;
+            const apellido = document.getElementById("apellido").value;
+
+            const usuario = { nombre, apellido };
+
+            const response = await fetch('http://localhost:8080/servicios/inicio/usuarios', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(usuario),
+            });
+
+            const result = await response.text();
+            alert(result);
+        }
+    </script>
+</body>
+</html>

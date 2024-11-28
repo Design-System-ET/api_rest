@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliminar Usuario</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        label {
+            font-weight: bold;
+        }
+        #response, #headers, #status {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+        }
+        .success {
+            color: green;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Eliminar Usuario</h1>
+    <form id="deleteForm" onsubmit="deleteUsuario(event)">
+        <label for="userId">ID del Usuario:</label>
+        <input type="number" id="userId" name="userId" required>
+        <button type="submit">Eliminar Usuario</button>
+    </form>
+    
+    <div id="status"></div>
+    <div id="headers"></div>
+    <div id="response"></div>
+
+    <script>
+        function deleteUsuario(event) {
+            event.preventDefault(); // Evita el envío del formulario
+
+            const userId = document.getElementById('userId').value;
+            const responseDiv = document.getElementById('response');
+            const headersDiv = document.getElementById('headers');
+            const statusDiv = document.getElementById('status');
+
+            fetch(`http://localhost:8080/servicios/inicio/borrar?id=${userId}`, {
+                method: 'DELETE',
+            })
+            .then(response => {
+                // Mostrar el código de estado HTTP
+                statusDiv.innerHTML = `<h3>Código HTTP: ${response.status}</h3>`;
+
+                // Mostrar encabezados de la respuesta
+                const headers = [...response.headers.entries()];
+                let headersHTML = '<h3>Encabezados de la Respuesta:</h3><ul>';
+                headers.forEach(([key, value]) => {
+                    headersHTML += `<li><strong>${key}:</strong> ${value}</li>`;
+                });
+                headersHTML += '</ul>';
+                headersDiv.innerHTML = headersHTML;
+
+                // Retornar el cuerpo de la respuesta
+                return response.json();
+            })
+            .then(data => {
+                // Mostrar el cuerpo de la respuesta (mensaje JSON)
+                responseDiv.innerHTML = `<p class="success">${data.message}</p>`;
+            })
+            .catch(error => {
+                // Manejar errores y mostrar mensaje
+                responseDiv.innerHTML = `<p class="error">Error: ${error.message}</p>`;
+            });
+        }
+    </script>
+</body>
+</html>

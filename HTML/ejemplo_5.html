@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Usuarios</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Lista de Usuarios</h1>
+    <button onclick="getUsuarios()">Obtener Usuarios</button>
+
+    <h2>Usuarios:</h2>
+    <table id="usuariosTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Edad</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Aquí se llenarán los datos de los usuarios -->
+        </tbody>
+    </table>
+
+    <script>
+        function getUsuarios() {
+    // Realiza la solicitud GET al backend
+    fetch('http://localhost:8080/servicios/inicio/lista')
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);  // Verifica la respuesta completa del servidor
+
+            // Cambia 'usuarios' por 'Usuarios' (con mayúscula inicial)
+            const usuarios = data.Usuarios;  // Obtiene la lista de usuarios (con la propiedad correcta)
+            const tableBody = document.querySelector('#usuariosTable tbody');
+            
+            // Limpia la tabla antes de agregar los nuevos usuarios
+            tableBody.innerHTML = '';
+
+            // Agrega cada usuario a la tabla
+            usuarios.forEach(usuario => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${usuario.id}</td>
+                    <td>${usuario.nombre}</td>
+                    <td>${usuario.apellido}</td>
+                    <td>${usuario.edad}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        })
+        .catch(error => {
+            console.error('Error al obtener los usuarios:', error);
+        });
+}
+    </script>
+
+</body>
+</html>

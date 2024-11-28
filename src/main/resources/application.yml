@@ -1,0 +1,15 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/spring_bd?zeroDateTimeBehavior=convertToNull&serverTimezone=UTC
+    username: root
+    password: iara159357
+
+server:
+  port: 8080
+  servlet:
+    context-path: /servicios
