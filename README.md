@@ -64,7 +64,7 @@ Configura las siguientes propiedades en el archivo:
 
 ```yml
 
-	spring:
+spring:
   application:
     name: api-rest
   jpa:
