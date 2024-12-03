@@ -158,6 +158,10 @@ Las operaciones disponibles son:
 - **Actualizar**: Modificar registros existentes.
 - **Eliminar**: Borrar registros.
 
+## 3\. Se agrega una carpeta HTML
+- Dicha carpeta contiene archivos HTML para probar cada metodo implementado en el controlador, estos metodos estan comentado con el nombre del archivo HTML para hacer las pruebas.
+- Modifica el js de cada HTML para indicar la URL que estes implementando.
+
 # Licencia
 Este proyecto está licenciado bajo la **MIT License**.
 
