@@ -23,6 +23,7 @@ El proyecto utiliza las siguientes herramientas y tecnologías:
 
 - **NetBeans IDE**: Versión 23.
 - **Java JDK**: Versión 23.
+- **MySQL**: para crear el schema de la BD
 
 ## Notas importantes
 
