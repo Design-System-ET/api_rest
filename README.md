@@ -58,7 +58,7 @@ No es necesario crear tablas manualmente, pero asegúrate de tener un esquema va
 ## 2\. Archivo application.yaml
 
 Configura las siguientes propiedades en el archivo:
-- **url**: de la base de datos indicando el nombre del schema
+- **NOMBRE-BD**: de la base de datos indicando el nombre del schema (modifica la url segun tu entorno y necesidades)
 - **USER**: usuario para la conexion a la BD
 - **PASSWORD**: Seña de la conexion a la BD
 - Tambien puedes indicar el **port** y el **context-path** para indicar el puerto y el endpoint de inicio de ejecucion.
